@@ -1,0 +1,35 @@
+{
+	"name": "epsg-index",
+	"description": "A machine-readable index of all EPSG coordinate systems.",
+	"version": "0.1.0",
+	"main": "index.js",
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"epsg",
+		"coordinate system",
+		"reference system",
+		"wgs 84",
+		"wgs84",
+		"index",
+		"list"
+	],
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/epsg-index",
+	"repository": "derhuerst/epsg-index",
+	"bugs": "https://github.com/derhuerst/epsg-index/issues",
+	"license": "ISC",
+	"engines": {
+		"node": ">=6"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"tap-min": "^1.2.1",
+		"tape": "^4.6.3"
+	},
+	"scripts": {
+		"test": "node test.js | tap-min",
+		"prepublishOnly": "npm test"
+	}
+}
