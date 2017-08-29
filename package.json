@@ -4,7 +4,8 @@
 	"version": "0.1.0",
 	"main": "index.js",
 	"files": [
-		"index.js"
+		"index.js",
+		"_"
 	],
 	"keywords": [
 		"epsg",
@@ -25,10 +26,16 @@
 	},
 	"dependencies": {},
 	"devDependencies": {
+		"fetch-ponyfill": "^4.1.0",
+		"lodash.pick": "^4.4.0",
+		"pinkie-promise": "^2.0.1",
+		"qs": "^6.5.0",
+		"queue": "^4.4.0",
 		"tap-min": "^1.2.1",
 		"tape": "^4.6.3"
 	},
 	"scripts": {
+		"build": "node build.js",
 		"test": "node test.js | tap-min",
 		"prepublishOnly": "npm test"
 	}
