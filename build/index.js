@@ -56,13 +56,14 @@ const fetchAll = (nrOfPages) => {
 
 const parseResult = (res) => {
 	return Object.assign(pick(res, [
-		'code', 'kind', 'name',
-		'wkt', 'proj4'
+		'code', 'kind', 'name'
 	]), {
+		wkt: res.wkt || null,
+		proj4: res.proj4 || null,
 		bbox: res.bbox || null,
 		unit: res.unit || null,
 		area: res.area || null,
-		accuracy: res.accuracy || null
+		accuracy: res.accuracy !== 'unknown' ? (res.accuracy || null) : null
 	})
 }
 
