@@ -1,5 +1,7 @@
 # epsg-index
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/derhuerst/epsg-index.svg)](https://greenkeeper.io/)
+
 **A machine-readable index of [all EPSG coordinate systems](https://epsg.io/?q=).** Similar to [`epsg`](https://github.com/stevage/epsg) and [`node-proj4js-defs`](https://github.com/yuletide/node-proj4js-defs), but kept up to date. Like [`python-epsg`](https://github.com/geo-data/python-epsg#python-epsg), but in JavaScript/JSON.
 
 [![npm version](https://img.shields.io/npm/v/epsg-index.svg)](https://www.npmjs.com/package/epsg-index)
