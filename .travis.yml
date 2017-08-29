@@ -6,8 +6,8 @@ script:
   - npm run build
   - npm test
 before_deploy:
-  - ls -lh s
-  - ls -lh all.json | head -n 10
+  - ls -lh s | head -n 10
+  - ls -lh all.json
   - npm i semver
   - npm version --no-git-tag-version --force $(./node_modules/.bin/semver -i minor $(npm info epsg-index version))
 deploy:
