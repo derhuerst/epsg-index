@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"files": [
 		"index.js",
-		"_"
+		"s"
 	],
 	"keywords": [
 		"epsg",
@@ -36,7 +36,7 @@
 	},
 	"scripts": {
 		"cleanup": "rm all.json s/*",
-		"build": "node build.js",
+		"build": "node build/index.js",
 		"test": "node test.js | tap-min",
 		"prepublishOnly": "npm run cleanup; npm run build && npm test"
 	}

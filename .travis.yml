@@ -2,6 +2,19 @@ sudo: false
 language: node_js
 node_js:
   - 'stable'
-  - '8'
-  - '7'
-  - '6'
+script:
+  - npm run build
+  - npm test
+before_deploy:
+  - ls -lh s
+  - ls -lh all.json
+  - npm i semver
+  - npm version --no-git-tag-version --force $(./node_modules/.bin/semver -i minor $(npm info epsg-index version))
+deploy:
+  provider: npm
+  on:
+    branch: master
+    node: 'stable'
+  email: 'mail@jannisr.de'
+  api_key: ${NPM_KEY}
+  skip_cleanup: true
