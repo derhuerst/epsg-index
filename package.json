@@ -35,8 +35,9 @@
 		"tape": "^4.6.3"
 	},
 	"scripts": {
+		"cleanup": "rm all.json s/*",
 		"build": "node build.js",
 		"test": "node test.js | tap-min",
-		"prepublishOnly": "npm test"
+		"prepublishOnly": "npm run cleanup; npm run build && npm test"
 	}
 }

@@ -66,9 +66,9 @@ const parseResult = (res) => {
 	})
 }
 
-const dir = path.join(__dirname, '..', '_')
+const dir = path.join(__dirname, '..', 's')
 
-const storeAll = (index) => {
+const storeIndividuals = (index) => {
 	return new Promise((yay, nay) => {
 		const queue = createQueue({concurrency: 8, autostart: true})
 
@@ -96,8 +96,28 @@ const storeAll = (index) => {
 	})
 }
 
+const storeAll = (index) => {
+	return new Promise((yay, nay) => {
+		const all = index.reduce((all, result) => {
+			all[result.code] = result
+			return all
+		}, {})
+
+		const dest = path.join(dir, '..', 'all.json')
+		fs.writeFile(dest, JSON.stringify(all), (err) => {
+			if (err) nay(err)
+			else yay()
+		})
+	})
+}
+
 getNrOfPages()
 .then(fetchAll)
-.then(results => results.map(parseResult))
-.then(storeAll)
+.then((results) => {
+	const index = results.map(parseResult)
+	return Promise.all([
+		storeAll(index),
+		storeIndividuals(index)
+	])
+})
 .catch(console.error)

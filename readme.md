@@ -18,7 +18,31 @@ npm install epsg-index
 ## Usage
 
 ```js
-todo
+const epsg4326 = require('epsg-index/s/4326.json')
+
+console.log(epsg4326)
+```
+
+```js
+{
+	code: '4326',
+	kind: 'CRS-GEOGCRS',
+	name: 'WGS 84',
+	wkt: 'GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]]',
+	proj4: '+proj=longlat +datum=WGS84 +no_defs',
+	bbox: [90, -180, -90, 180],
+	unit: 'degree (supplier to define representation)',
+	area: 'World.',
+	accuracy: null
+}
+```
+
+You can also load all coordinate systems (`5mb` of data):
+
+```js
+const all = require('epsg-index/all.json')
+
+console.log(all['4326'])
 ```
 
 
