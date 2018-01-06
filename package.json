@@ -29,7 +29,7 @@
 	"devDependencies": {
 		"fetch-ponyfill": "^4.1.0",
 		"lodash.pick": "^4.4.0",
-		"pinkie-promise": "^2.0.1",
+		"pinkie-promise": "^2.0.2",
 		"qs": "^6.5.0",
 		"queue": "^4.4.0",
 		"tap-min": "^1.2.1",
