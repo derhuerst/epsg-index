@@ -8,8 +8,7 @@ script:
 before_deploy:
   - ls -lh s | head -n 10
   - ls -lh all.json
-  - npm i semver
-  - npm version --no-git-tag-version --force $(./node_modules/.bin/semver -i minor $(npm info epsg-index version))
+  - npm version --no-git-tag-version --force $(npx semver -- -i minor $(npm info epsg-index version))
 deploy:
   provider: npm
   on:
