@@ -49,7 +49,7 @@ console.log(all['4326'])
 
 ## Related
 
-- [`transform-coordinates`] – Transform coordinates from one coordinate system to another. Built on top of `epsg-index`.
+- [`transform-coordinates`](https://github.com/derhuerst/transform-coordinates) – Transform coordinates from one coordinate system to another. Built on top of `epsg-index`.
 
 
 ## Contributing
