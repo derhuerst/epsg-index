@@ -1,7 +1,7 @@
 {
 	"name": "epsg-index",
 	"description": "A machine-readable index of all EPSG coordinate systems.",
-	"version": "0.2.1",
+	"version": "1.0.0",
 	"main": "index.js",
 	"files": [
 		"index.js",
@@ -23,7 +23,7 @@
 	"bugs": "https://github.com/derhuerst/epsg-index/issues",
 	"license": "ISC",
 	"engines": {
-		"node": ">=6"
+		"node": ">=8"
 	},
 	"dependencies": {},
 	"devDependencies": {
@@ -32,7 +32,7 @@
 		"pinkie-promise": "^2.0.1",
 		"qs": "^6.5.0",
 		"queue": "^6.0.0",
-		"tap-min": "^1.2.1",
+		"tap-min": "^2.0.0",
 		"tape": "^4.8.0"
 	},
 	"scripts": {
