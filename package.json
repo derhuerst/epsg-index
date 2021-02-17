@@ -1,7 +1,7 @@
 {
 	"name": "epsg-index",
 	"description": "A machine-readable index of all EPSG coordinate systems.",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"main": "index.js",
 	"files": [
 		"index.js",

@@ -5,8 +5,8 @@
 [![npm version](https://img.shields.io/npm/v/epsg-index.svg)](https://www.npmjs.com/package/epsg-index)
 [![build status](https://img.shields.io/travis/derhuerst/epsg-index.svg)](https://travis-ci.org/derhuerst/epsg-index)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/epsg-index.svg)
-[![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
-[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst)
+[![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
+[![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
 
 
 ## Installing
