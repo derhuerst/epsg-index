@@ -3,7 +3,6 @@
 **A machine-readable index of [all EPSG coordinate systems](https://epsg.io/?q=).** Similar to [`epsg`](https://github.com/stevage/epsg) and [`node-proj4js-defs`](https://github.com/yuletide/node-proj4js-defs), but kept up to date. Like [`python-epsg`](https://github.com/geo-data/python-epsg#python-epsg), but in JavaScript/JSON.
 
 [![npm version](https://img.shields.io/npm/v/epsg-index.svg)](https://www.npmjs.com/package/epsg-index)
-[![build status](https://img.shields.io/travis/derhuerst/epsg-index.svg)](https://travis-ci.org/derhuerst/epsg-index)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/epsg-index.svg)
 [![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
 [![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
