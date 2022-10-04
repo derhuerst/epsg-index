@@ -1,0 +1,37 @@
+name: build & publish to npm
+
+on:
+  push:
+    branches:
+      - publish
+  schedule:
+    # on day-of-month 5 at 02:50
+    - cron:  '50 2 5 * *'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['8']
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: setup Node v${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+
+    - run: npm run build
+    - run: npm test
+
+    - run: ls -lh s | head -n 10
+    - run: ls -lh all.json
+    - name: bump version
+      run: npm version --no-git-tag-version --force $(npx semver -- -i minor $(npm info epsg-index version))
+    - name: publish
+      run: npm publish
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
