@@ -8,14 +8,7 @@ const all = require('./all.json')
 test('EPSG:4326 a.k.a WGS 84', (t) => {
 	t.ok(epsg4326)
 	t.equal(epsg4326.code, '4326')
-	t.equal(epsg4326.kind, 'CRS-GEOGCRS')
-	t.ok(epsg4326.name)
-	t.ok(epsg4326.wkt)
-	t.ok(epsg4326.proj4)
-	t.ok(epsg4326.unit)
-	t.ok(epsg4326.area)
-	t.deepEqual(epsg4326.bbox, [90, -180, -90, 180])
-	t.ok('accuracy' in epsg4326)
+	t.equal(epsg4326.kind, 'geographic 2D')
 
 	t.end()
 })
@@ -30,16 +23,48 @@ const looksValid = (t, cs) => {
 	t.equal(typeof cs.name, 'string', cs.code)
 	t.ok(cs.name, cs.code)
 
-	if (cs.wkt) t.equal(typeof cs.wkt, 'string', cs.code)
-	if (cs.proj4) t.equal(typeof cs.proj4, 'string', cs.code)
-
-	if (cs.bbox) {
-		t.ok(Array.isArray(cs.bbox), cs.code)
-		t.equal(cs.bbox.length, 4, cs.code)
+	if (cs.remark !== null) {
+		t.equal(typeof cs.remark, 'string', cs.code)
+		t.ok(cs.remark, cs.code)
 	}
-	if (cs.unit) t.equal(typeof cs.unit, 'string', cs.code)
-	if (cs.area) t.equal(typeof cs.area, 'string', cs.code)
-	if (cs.accuracy) t.equal(typeof cs.accuracy, 'number', cs.code)
+
+	t.equal(typeof cs.dataSource, 'string', cs.code)
+	t.ok(cs.dataSource, cs.code)
+	if (cs.informationSource !== null) {
+		t.equal(typeof cs.informationSource, 'string', cs.code)
+		t.ok(cs.informationSource, cs.code)
+	}
+
+	t.equal(typeof cs.revisionDate, 'string', cs.code)
+	t.ok(cs.revisionDate, cs.code)
+	t.ok(Number.isInteger(Date.parse(cs.revisionDate)), cs.code)
+
+	if (cs.datum !== null) {
+		t.equal(typeof cs.datum['@id'], 'string', cs.code)
+		t.ok(cs.datum['@id'], cs.code)
+		t.equal(typeof cs.datum.code, 'string', cs.code)
+		t.ok(cs.datum.code, cs.code)
+		t.equal(typeof cs.datum.name, 'string', cs.code)
+		t.ok(cs.datum.name, cs.code)
+	}
+
+	if (cs.baseCoordRefSystem !== null) {
+		t.equal(typeof cs.baseCoordRefSystem['@id'], 'string', cs.code)
+		t.ok(cs.baseCoordRefSystem['@id'], cs.code)
+		t.equal(typeof cs.baseCoordRefSystem.code, 'string', cs.code)
+		t.ok(cs.baseCoordRefSystem.code, cs.code)
+		t.equal(typeof cs.baseCoordRefSystem.name, 'string', cs.code)
+		t.ok(cs.baseCoordRefSystem.name, cs.code)
+	}
+
+	if (cs.conversion !== null) {
+		t.equal(typeof cs.conversion['@id'], 'string', cs.code)
+		t.ok(cs.conversion['@id'], cs.code)
+		t.equal(typeof cs.conversion.code, 'string', cs.code)
+		t.ok(cs.conversion.code, cs.code)
+		t.equal(typeof cs.conversion.name, 'string', cs.code)
+		t.ok(cs.conversion.name, cs.code)
+	}
 }
 
 test('all', (t) => {
