@@ -7,6 +7,8 @@
 [![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
 [![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
 
+*Note:* The data is licensed according to [EPSG's apparently proprietary license](license.data.md).
+
 
 ## Installing
 
@@ -25,15 +27,29 @@ console.log(epsg4326)
 
 ```js
 {
+	'@id': 'https://apps.epsg.org/api/v1/GeodeticCoordRefSystem/4326',
 	code: '4326',
-	kind: 'CRS-GEOGCRS',
 	name: 'WGS 84',
-	wkt: 'GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]]',
-	proj4: '+proj=longlat +datum=WGS84 +no_defs',
-	bbox: [90, -180, -90, 180],
-	unit: 'degree (supplier to define representation)',
-	area: 'World.',
-	accuracy: null
+	kind: 'geographic 2D',
+	remark: null,
+	dataSource: 'EPSG',
+	informationSource: null,
+	revisionDate: '2020-03-14T00:00:00',
+	datum: {
+		'@id': 'https://apps.epsg.org/api/v1/Datum/6326',
+		code: '6326',
+		name: 'World Geodetic System 1984 ensemble',
+	},
+	baseCoordRefSystem: {
+		'@id': 'https://apps.epsg.org/api/v1/GeodeticCoordRefSystem/4979',
+		code: '4979',
+		name: 'WGS 84',
+	},
+	conversion: {
+		'@id': 'https://apps.epsg.org/api/v1/Conversion/15593',
+		code: '15593',
+		name: 'geographic3D to geographic2D',
+	},
 }
 ```
 
