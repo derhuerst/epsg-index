@@ -29,6 +29,7 @@
 	"devDependencies": {
 		"fetch-ponyfill": "^6.0.0",
 		"lodash.pick": "^4.4.0",
+		"p-retry": "^4.6.2",
 		"pinkie-promise": "^2.0.1",
 		"qs": "^6.5.0",
 		"queue": "^6.0.0",

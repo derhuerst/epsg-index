@@ -19,7 +19,7 @@ const getNrOfPages = () => {
 
 const fetchAll = (nrOfPages) => {
 	return new Promise((yay, nay) => {
-		const queue = createQueue({concurrency: 8, autostart: true})
+		const queue = createQueue({concurrency: 2, autostart: true})
 		let results = []
 
 		const fetch = (i) => {
