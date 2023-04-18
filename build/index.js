@@ -24,7 +24,11 @@ const fetchAll = (nrOfPages) => {
 
 		const fetch = (i) => {
 			const job = (cb) => {
-				req({q: '', page: i})
+				req({
+					q: '',
+					// page=0 fails with 422 for some reason 🙄
+					page: i === 0 ? undefined : i,
+				})
 				.then((data) => {
 					results = results.concat(data.results)
 					cb()
