@@ -48,7 +48,7 @@ const fetchAll = (nrOfPages) => {
 			if (!err) yay(results)
 		})
 		queue.on('success', (_, job) => {
-			console.error(job.title + '/' + nrOfPages)
+			console.log(job.title + '/' + nrOfPages)
 		})
 
 		for (let i = 0; i <= nrOfPages; i++) {
