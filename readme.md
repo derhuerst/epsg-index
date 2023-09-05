@@ -50,6 +50,7 @@ console.log(all['4326'])
 ## Related
 
 - [`transform-coordinates`](https://github.com/derhuerst/transform-coordinates) – Transform coordinates from one coordinate system to another. Built on top of `epsg-index`.
+- [python-epsg](https://github.com/geo-data/python-epsg) – A Python API to the EPSG Geodetic Parameter Dataset.
 
 
 ## Contributing
