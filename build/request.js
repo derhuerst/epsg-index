@@ -1,7 +1,4 @@
 import {stringify} from 'qs'
-import Promise from 'pinkie-promise'
-import createFetch from 'fetch-ponyfill'
-const {fetch} = createFetch({Promise})
 import pRetry from 'p-retry'
 const {AbortError: AbortRetryingError} = pRetry
 
