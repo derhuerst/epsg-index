@@ -23,7 +23,7 @@
 	"bugs": "https://github.com/derhuerst/epsg-index/issues",
 	"license": "ISC",
 	"engines": {
-		"node": ">=8"
+		"node": ">=18"
 	},
 	"devDependencies": {
 		"fetch-ponyfill": "^6.0.0",
