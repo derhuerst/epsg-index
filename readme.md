@@ -19,6 +19,11 @@ npm install epsg-index
 ## Usage
 
 ```js
+// use import assertions once they're supported by Node.js & ESLint
+// https://github.com/tc39/proposal-import-assertions
+import {createRequire} from 'module'
+const require = createRequire(import.meta.url)
+
 const epsg4326 = require('epsg-index/s/4326.json')
 
 console.log(epsg4326)

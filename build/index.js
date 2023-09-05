@@ -1,20 +1,13 @@
-'use strict'
+import createQueue from 'queue'
+import pick from 'lodash.pick'
+import {join as pathJoin} from 'node:path'
+import {writeFile} from 'node:fs'
+import {fileURLToPath} from 'node:url'
+import {request as req} from './request.js'
 
-const createQueue = require('queue')
-const pick = require('lodash.pick')
-const path = require('path')
-const fs = require('fs')
-
-const req = require('./request')
-
-const showError = (err) => {
-	console.error(err)
-	process.exit(1)
-}
-
-const getNrOfPages = () => {
-	return req({q: ''})
-	.then(data => Math.ceil(data.number_result / data.results.length))
+const getNrOfPages = async () => {
+	const data = await req({q: ''})
+	return Math.ceil(data.number_result / data.results.length)
 }
 
 const fetchAll = (nrOfPages) => {
@@ -71,7 +64,7 @@ const parseResult = (res) => {
 	})
 }
 
-const dir = path.join(__dirname, '..', 's')
+const dir = fileURLToPath(new URL('../s', import.meta.url).href)
 
 const storeIndividuals = (index) => {
 	return new Promise((yay, nay) => {
@@ -79,8 +72,8 @@ const storeIndividuals = (index) => {
 
 		const store = (result) => {
 			const job = (cb) => {
-				const dest = path.join(dir, result.code + '.json')
-				fs.writeFile(dest, JSON.stringify(result), cb)
+				const dest = pathJoin(dir, result.code + '.json')
+				writeFile(dest, JSON.stringify(result), cb)
 			}
 
 			job.title = result.code
@@ -108,21 +101,22 @@ const storeAll = (index) => {
 			return all
 		}, {})
 
-		const dest = path.join(dir, '..', 'all.json')
-		fs.writeFile(dest, JSON.stringify(all), (err) => {
+		const dest = pathJoin(dir, '..', 'all.json')
+		writeFile(dest, JSON.stringify(all), (err) => {
 			if (err) nay(err)
 			else yay()
 		})
 	})
 }
 
-getNrOfPages()
-.then(fetchAll)
-.then((results) => {
+{
+	const nrOfPages = await getNrOfPages()
+
+	const results = await fetchAll(nrOfPages)
 	const index = results.map(parseResult)
-	return Promise.all([
+
+	await Promise.all([
 		storeAll(index),
 		storeIndividuals(index)
 	])
-})
-.catch(showError)
+}

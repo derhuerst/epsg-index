@@ -1,6 +1,9 @@
-'use strict'
+// todo: use import assertions once they're supported by Node.js & ESLint
+// https://github.com/tc39/proposal-import-assertions
+import {createRequire} from 'module'
+const require = createRequire(import.meta.url)
 
-const test = require('tape')
+import test from 'tape'
 
 const epsg4326 = require('./s/4326.json')
 const all = require('./all.json')
