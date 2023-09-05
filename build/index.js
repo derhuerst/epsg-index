@@ -1,4 +1,4 @@
-import createQueue from 'queue'
+import Queue from 'queue'
 import pick from 'lodash.pick'
 import {join as pathJoin} from 'node:path'
 import {writeFile} from 'node:fs'
@@ -12,40 +12,41 @@ const getNrOfPages = async () => {
 
 const fetchAll = (nrOfPages) => {
 	return new Promise((yay, nay) => {
-		const queue = createQueue({concurrency: 2, autostart: true})
+		const queue = new Queue({concurrency: 2, autostart: true})
 		let results = []
 
 		const fetch = (i) => {
-			const job = (cb) => {
-				req({
+			const job = async () => {
+				const data = await req({
 					q: '',
 					// page=0 fails with 422 for some reason 🙄
 					page: i === 0 ? undefined : i,
 				})
-				.then((data) => {
-					results = results.concat(data.results)
-					cb()
-				})
-				.catch(cb)
+				results = [
+					...results,
+					...data.results,
+				]
 			}
 
 			job.title = i + ''
 			return job
 		}
 
-		queue.once('error', (err) => {
+		queue.addEventListener('error', (ev) => {
+			const {error: err} = ev.detail
 			queue.stop()
 			nay(err)
-		})
-		queue.once('end', (err) => {
+		}, {once: true})
+		queue.addEventListener('end', (ev) => {
+			const {error: err} = ev.detail
 			if (!err) yay(results)
-		})
-		queue.on('success', (_, job) => {
+		}, {once: true})
+		queue.addEventListener('success', (ev) => {
+			const {job} = ev.detail
 			console.log(job.title + '/' + nrOfPages)
 		})
 
 		for (let i = 0; i <= nrOfPages; i++) {
-		// for (let i = 0; i <= 10; i++) { // todo
 			queue.push(fetch(i))
 		}
 	})
@@ -68,7 +69,7 @@ const dir = fileURLToPath(new URL('../s', import.meta.url).href)
 
 const storeIndividuals = (index) => {
 	return new Promise((yay, nay) => {
-		const queue = createQueue({concurrency: 8, autostart: true})
+		const queue = new Queue({concurrency: 8, autostart: true})
 
 		const store = (result) => {
 			const job = (cb) => {
@@ -80,13 +81,15 @@ const storeIndividuals = (index) => {
 			return job
 		}
 
-		queue.once('error', (err) => {
+		queue.addEventListener('error', (ev) => {
+			const {err} = ev.detail
 			queue.stop()
 			nay(err)
-		})
-		queue.once('end', (err) => {
+		}, {once: true})
+		queue.addEventListener('end', (ev) => {
+			const {err} = ev.detail
 			if (!err) yay()
-		})
+		}, {once: true})
 
 		for (let result of index) {
 			queue.push(store(result))
