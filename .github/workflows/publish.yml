@@ -8,12 +8,16 @@ on:
     # on day-of-month 5 at 02:50
     - cron:  '50 2 5 * *'
 
+permissions:
+  id-token: write # for OIDC-based publishing to npm
+
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: ['18']
+        node-version:
+          - '22'
 
     steps:
     - name: checkout
@@ -22,6 +26,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    # for OIDC-based publishing to npm
+    - name: setup npm v11
+      run: npm install -g npm@11
+
     - run: npm install
 
     - run: npm run build
@@ -33,5 +41,3 @@ jobs:
       run: npm version --no-git-tag-version --force $(npx semver -- -i minor $(npm info epsg-index version))
     - name: publish
       run: npm publish
-      env:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
