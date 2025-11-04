@@ -36,7 +36,7 @@
 	},
 	"scripts": {
 		"cleanup": "rm all.json s/*",
-		"build": "node build/index.js",
+		"build": "node --env-file=.env build/index.js",
 		"test": "node test.js | tap-min",
 		"prepublishOnly": "npm run cleanup; npm run build && npm test"
 	}
