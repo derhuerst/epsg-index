@@ -5,6 +5,7 @@ Thumbs.db
 node_modules
 npm-debug.log
 package-lock.json
+.env
 
 s
 all.json

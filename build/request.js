@@ -1,12 +1,19 @@
-import {stringify} from 'qs'
+import { stringify } from 'qs'
 import pRetry from 'p-retry'
-const {AbortError: AbortRetryingError} = pRetry
+const { AbortError: AbortRetryingError } = pRetry
 
-const endpoint = 'https://epsg.io/'
+// https://docs.maptiler.com/cloud/api/coordinates/
+const endpoint = 'https://api.maptiler.com/coordinates/search/*.json'
 const userAgent = 'https://github.com/derhuerst/epsg-index'
+const defaultItemsCount = 50
 
 const _request = async (query) => {
-	query = Object.assign({format: 'json'}, query)
+	query = {
+		exports: 'true',
+		limit: defaultItemsCount,
+		offset: query.page * defaultItemsCount,
+		key: process.env.API_KEY
+	}
 
 	const res = await fetch(endpoint + '?' + stringify(query), {
 		mode: 'cors', redirect: 'follow',
@@ -16,7 +23,7 @@ const _request = async (query) => {
 		},
 	})
 	if (!res.ok) {
-		const err = res.status === 422
+		const err = (res.status === 403)
 			? new Error(res.statusText)
 			: new AbortRetryingError(res.statusText)
 		err.query = query

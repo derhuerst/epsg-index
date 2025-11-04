@@ -17,7 +17,7 @@ test('EPSG:4326 a.k.a WGS 84', (t) => {
 	t.ok(epsg4326.proj4)
 	t.ok(epsg4326.unit)
 	t.ok(epsg4326.area)
-	t.deepEqual(epsg4326.bbox, [90, -180, -90, 180])
+	t.deepEqual(epsg4326.bbox, [-180, -90, 180, 90])
 	t.ok('accuracy' in epsg4326)
 
 	t.end()

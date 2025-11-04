@@ -6,8 +6,8 @@ import {fileURLToPath} from 'node:url'
 import {request as req} from './request.js'
 
 const getNrOfPages = async () => {
-	const data = await req({q: ''})
-	return Math.ceil(data.number_result / data.results.length)
+	const data = await req({page: 0})
+	return Math.ceil(data.total / data.results.length)
 }
 
 const fetchAll = (nrOfPages) => {
@@ -17,11 +17,7 @@ const fetchAll = (nrOfPages) => {
 
 		const fetch = (i) => {
 			const job = async () => {
-				const data = await req({
-					q: '',
-					// page=0 fails with 422 for some reason 🙄
-					page: i === 0 ? undefined : i,
-				})
+				const data = await req({page: i})
 				results = [
 					...results,
 					...data.results,
@@ -54,13 +50,14 @@ const fetchAll = (nrOfPages) => {
 
 const parseResult = (res) => {
 	return Object.assign(pick(res, [
-		'code', 'kind', 'name'
+		'kind', 'name'
 	]), {
-		wkt: res.wkt || null,
-		proj4: res.proj4 || null,
-		bbox: res.bbox || null,
-		unit: res.unit || null,
-		area: res.area || null,
+		code: res.id.code + '',
+		wkt: res.exports?.wkt || null,
+		proj4: res.exports?.proj4 || null,
+		bbox: res.bbox || null,
+		unit: res.unit || null,
+		area: res.area || null,
 		accuracy: res.accuracy !== 'unknown' ? (res.accuracy || null) : null
 	})
 }
